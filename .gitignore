@@ -28,7 +28,8 @@ db/*.sqlite3
 .redcar/
 .sass-cache
 /config/config.yml
-/config/database.yml
+#Safe to store since it's in ENV
+#/config/database.yml
 /coverage.data
 /coverage/
 /db/*.javadb/
