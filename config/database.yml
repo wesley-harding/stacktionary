@@ -54,12 +54,13 @@ test:
   password:
   template: template0
 
-production:
-  adapter:  postgresql
-  host:     <%= ENV['DATABASE_URL'] %>
-  encoding: unicode
-  database: <%= ENV['DB_NAME'] %>
-  pool:     5
-  username: <%= ENV['DB_USER'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  template: template0
+# Based on the Heroku documentation - it looks like this is automatically generated
+#production:
+#  adapter:  postgresql
+#  host:     <%= ENV['DATABASE_URL'] %>
+#  encoding: unicode
+#  database: <%= ENV['DB_NAME'] %>
+#  pool:     5
+#  username: <%= ENV['DB_USER'] %>
+#  password: <%= ENV['DB_PASSWORD'] %>
+#  template: template0
