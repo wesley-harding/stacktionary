@@ -1,0 +1,25 @@
+h1 Listing definitions
+
+table
+  thead
+    tr
+      th User
+      th Definition
+      th Entry
+      th
+      th
+      th
+
+  tbody
+    - @definitions.each do |definition|
+      tr
+        td = definition.user
+        td = definition.definition
+        td = definition.entry
+        td = link_to 'Show', definition
+        td = link_to 'Edit', edit_definition_path(definition)
+        td = link_to 'Destroy', definition, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Definition', new_definition_path

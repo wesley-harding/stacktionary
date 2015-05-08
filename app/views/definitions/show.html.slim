@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong User:
+  = @definition.user
+p
+  strong Definition:
+  = @definition.definition
+p
+  strong Entry:
+  = @definition.entry
+
+= link_to 'Edit', edit_definition_path(@definition)
+'|
+= link_to 'Back', definitions_path

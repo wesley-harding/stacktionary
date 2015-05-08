@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong User:
+  = @reference.user
+p
+  strong Source:
+  = @reference.source
+p
+  strong Entry:
+  = @reference.entry
+
+= link_to 'Edit', edit_reference_path(@reference)
+'|
+= link_to 'Back', references_path

@@ -11,51 +11,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508004200) do
+ActiveRecord::Schema.define(version: 20150508022522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "definitions", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "content"
+    t.text     "definition"
+    t.integer  "entry_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "definitions", ["entry_id"], name: "index_definitions_on_entry_id", using: :btree
   add_index "definitions", ["user_id"], name: "index_definitions_on_user_id", using: :btree
 
   create_table "entries", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "content"
-    t.integer  "definition_id"
-    t.integer  "example_id"
-    t.integer  "reference_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "entries", ["definition_id"], name: "index_entries_on_definition_id", using: :btree
-  add_index "entries", ["example_id"], name: "index_entries_on_example_id", using: :btree
-  add_index "entries", ["reference_id"], name: "index_entries_on_reference_id", using: :btree
-  add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
-
-  create_table "examples", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "content"
+    t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
+
+  create_table "examples", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "example"
+    t.integer  "entry_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "examples", ["entry_id"], name: "index_examples_on_entry_id", using: :btree
   add_index "examples", ["user_id"], name: "index_examples_on_user_id", using: :btree
 
   create_table "references", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "source"
+    t.integer  "entry_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "references", ["entry_id"], name: "index_references_on_entry_id", using: :btree
   add_index "references", ["user_id"], name: "index_references_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -82,11 +82,11 @@ ActiveRecord::Schema.define(version: 20150508004200) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "definitions", "entries"
   add_foreign_key "definitions", "users"
-  add_foreign_key "entries", "\"references\"", column: "reference_id"
-  add_foreign_key "entries", "definitions"
-  add_foreign_key "entries", "examples"
   add_foreign_key "entries", "users"
+  add_foreign_key "examples", "entries"
   add_foreign_key "examples", "users"
+  add_foreign_key "references", "entries"
   add_foreign_key "references", "users"
 end
