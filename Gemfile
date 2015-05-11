@@ -8,11 +8,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'cocoon'
-group :development, :test do
-  gem 'byebug'
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
-end
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'figaro', '>= 1.0.0.rc1'
@@ -24,6 +19,9 @@ gem 'simple_form'
 gem 'slim-rails'
 gem 'upmin-admin'
 gem 'paper_trail'
+gem 'ransack'
+gem 'kaminari'
+
 group :development do
   gem 'better_errors'
   gem 'guard-bundler'
@@ -38,6 +36,9 @@ group :development do
   gem 'spring-commands-rspec'
 end
 group :development, :test do
+  gem 'byebug'
+  gem 'web-console', '~> 2.0'
+  gem 'spring'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'pry-rails'
@@ -45,13 +46,13 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop'
 end
-group :production do
-  gem 'passenger'
-  gem 'rails_12factor'
-end
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
+end
+group :production do
+  gem 'passenger'
+  gem 'rails_12factor'
 end

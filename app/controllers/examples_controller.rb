@@ -1,5 +1,6 @@
 class ExamplesController < ApplicationController
   before_action :set_example, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, :except => :index
 
   # GET /examples
   # GET /examples.json

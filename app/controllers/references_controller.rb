@@ -1,5 +1,6 @@
 class ReferencesController < ApplicationController
   before_action :set_reference, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, :except => :index
 
   # GET /references
   # GET /references.json

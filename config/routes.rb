@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
+  concern :paginatable do
+    get '(page/:page)', :action => :index, :on => :collection, :as => ''
+  end
+
+
   resources :definitions
   resources :examples
   resources :references
-  resources :references
-  resources :examples
-  resources :definitions
-  resources :entries
-  resources :entries
-  resources :examples
-  resources :references
-  resources :definitions
+  resources :entries, :concerns => :paginatable
+
+
   mount Upmin::Engine => '/admin'
   root to: 'visitors#index'
   devise_for :users

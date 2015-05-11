@@ -4,7 +4,7 @@ table
   thead
     tr
       th User
-      th Content
+      th Term
       th
       th
       th
@@ -13,10 +13,14 @@ table
     - @entries.each do |entry|
       tr
         td = entry.user
-        td = entry.content
+        td = entry.term
         td = link_to 'Show', entry
         td = link_to 'Edit', edit_entry_path(entry)
         td = link_to 'Destroy', entry, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= paginate @entries
 
 br
 

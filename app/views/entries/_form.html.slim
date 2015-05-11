@@ -2,8 +2,23 @@
   = f.error_notification
 
   .form-inputs
-    = f.association :user
-    = f.input :content
+    = f.input :term
+    #definitions
+      = f.simple_fields_for :definitions do |definition|
+        = render 'definition_fields', :f => definition
+      .links
+        = link_to_add_association 'Add Definition', f, :definitions
+    #examples
+      = f.simple_fields_for :examples do |example|
+        = render 'example_fields', :f => example
+      .links
+        = link_to_add_association 'Add Example', f, :examples
+    #references
+      = f.simple_fields_for :references do |reference|
+        = render 'reference_fields', :f => reference
+      .links
+        = link_to_add_association 'Add Reference', f, :references
+
 
   .form-actions
     = f.button :submit

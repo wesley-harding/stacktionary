@@ -1,0 +1,7 @@
+.col-sm-3.col-md-3
+  = search_form_for @search, html: {class: 'navbar-form'} do |f|
+    .input-group
+      = f.text_field :term_cont, placeholder: "Search", class: 'form-control'
+      .input-group-btn
+        = f.button :submit, class: ['btn', 'btn-default']
+          i.glyphicon.glyphicon-search

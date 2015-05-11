@@ -1,5 +1,6 @@
 class DefinitionsController < ApplicationController
   before_action :set_definition, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, :except => :index
 
   # GET /definitions
   # GET /definitions.json
