@@ -8,5 +8,7 @@ class Entry < ActiveRecord::Base
   accepts_nested_attributes_for :references,  :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :examples,    :reject_if => :all_blank, :allow_destroy => true
 
+  has_paper_trail :only => [:term]
+
   validates :term, presence: true, length: {maximum: 64}, uniqueness: {case_sensitive: false}
 end
