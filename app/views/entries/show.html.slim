@@ -1,11 +1,26 @@
 .container
-  p#notice = notice
+  /p#notice = notice
+
+  h3 = @entry.term
+
+  .votes
+    a.btn.btn-primary.btn-xs.votes-up data-model='entry' class=(['has-vote', 'bg-info'] if !current_user.blank? and current_user.likes @entry) Up
+    = @entry.get_likes.size
+    a.btn.btn-danger.btn-xs.votes-down data-model='entry' class=(['has-vote', 'bg-warning'] if !current_user.blank? and current_user.dislikes @entry) Down
+
+  - if @entry.user == current_user
+    = link_to 'Edit', edit_entry_path(@entry)
 
   p
     strong User:
-    = @entry.user
-  p
-    strong Term:
-    = @entry.term
-  - if @entry.user == current_user
-    = link_to 'Edit', edit_entry_path(@entry)
+    = @entry.user.username
+
+  h4 Definitions
+  - @entry.definitions.each do |definition|
+    .votes
+      a.btn.btn-primary.btn-xs.votes-up data-model='definition' class=(['has-vote', 'bg-info'] if !current_user.blank? and current_user.likes definition) Up
+      = definition.get_likes.size
+      a.btn.btn-danger.btn-xs.votes-down data-model='definition' class=(['has-vote', 'bg-warning'] if !current_user.blank? and current_user.dislikes definition) Down
+    = definition.definition
+    h5 User
+    = definition.user.username

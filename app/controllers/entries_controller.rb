@@ -23,6 +23,7 @@ class EntriesController < ApplicationController
   # GET /entries/1
   # GET /entries/1.json
   def show
+    @entry = Entry.includes(:definitions => :user, :examples => :user, :references => :user).find(params[:id])
   end
 
   # GET /entries/new
@@ -42,6 +43,12 @@ class EntriesController < ApplicationController
   def create
     @entry = Entry.new(entry_params)
     @entry.user = current_user
+
+    ['definitions', 'examples', 'references'].each do |name|
+      @entry.send(name).each do |model|
+        model.user = current_user
+      end
+    end
 
     authorize @entry
 
@@ -96,6 +103,11 @@ class EntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      params.require(:entry).permit(:term, :id, :_destroy)
+      params.require(:entry).permit(
+          :term, :id, :_destroy,
+          definitions_attributes: [:definition, :id, :_destroy],
+          examples_attributes: [:example, :id, :_destroy],
+          references_attributes: [:source, :id, :_destroy]
+      )
     end
 end
