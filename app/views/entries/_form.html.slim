@@ -2,23 +2,30 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :term
+    = f.input :term, as: :string, hint: 'This should be a string with one or more token. e.g. "Lorem Ipsum"'
+    h3  Definitions
+    p Add a definition or two for your new addition to the Stacktionary Lexicon
     #definitions
       = f.simple_fields_for :definitions do |definition|
         = render 'definition_fields', :f => definition
       .links
-        = link_to_add_association 'Add Definition', f, :definitions
+        = link_to_add_association 'Add Definition', f, :definitions, class: ['btn', 'btn-primary', 'btn-xs']
+    h3 Examples
+    p Optional. Provide an example of how the term is actually used.
     #examples
       = f.simple_fields_for :examples do |example|
         = render 'example_fields', :f => example
       .links
-        = link_to_add_association 'Add Example', f, :examples
+        = link_to_add_association 'Add Example', f, :examples, class: ['btn', 'btn-primary', 'btn-xs']
+    h3 References
+    p Optional. Links to external resources
     #references
       = f.simple_fields_for :references do |reference|
         = render 'reference_fields', :f => reference
       .links
-        = link_to_add_association 'Add Reference', f, :references
+        = link_to_add_association 'Add Reference', f, :references, class: ['btn', 'btn-primary', 'btn-xs']
 
-
+  br
+  br
   .form-actions
-    = f.button :submit
+    = f.button :submit, class: ['btn', 'btn-success']

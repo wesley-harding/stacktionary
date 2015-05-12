@@ -1,8 +1,14 @@
-h1 Editing entry
+.container
+  h1 Editing entry
 
-== render 'form'
+  = simple_form_for(@entry) do |f|
+    = f.error_notification
 
-= link_to 'Show', @entry
-'|
-= link_to 'Back', entries_path
+    .form-inputs
+      = f.input :term, as: :string, hint: 'This should be a string with one or more token. e.g. "Lorem Ipsum"'
+    br
+    br
+    .form-actions
+      = f.button :submit, class: ['btn', 'btn-success']
+
 

@@ -14,6 +14,7 @@ class EntriesController < ApplicationController
   def index
     # @entries = Entry.all
     @search.sorts = ['term desc', 'created_at desc'] if @search.sorts.empty?
+    @search_term = params[:q]
     @entries = @search.result(distinct: true).includes(:definitions).page(params[:page]).per(params[:per_page])
 
     1

@@ -1,27 +1,31 @@
-h1 Listing entries
+.container
+  - unless @search_term['term_cont'].empty?
+    span Search results for #{@search_term['term_cont']}
 
-table
-  thead
-    tr
-      th User
-      th Term
-      th
-      th
-      th
+  h1 Listing entries
 
-  tbody
-    - @entries.each do |entry|
+  table
+    thead
       tr
-        td = entry.user
-        td = entry.term
-        td = link_to 'Show', entry
-        td = link_to 'Edit', edit_entry_path(entry)
-        td = link_to 'Destroy', entry, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th User
+        th Term
+        th
+        th
+        th
 
-br
+    tbody
+      - @entries.each do |entry|
+        tr
+          td = entry.user
+          td = entry.term
+          td = link_to 'Show', entry
+          td = link_to 'Edit', edit_entry_path(entry)
+          td = link_to 'Destroy', entry, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-= paginate @entries
+  br
 
-br
+  = paginate @entries
 
-= link_to 'New Entry', new_entry_path
+  br
+
+  = link_to 'New Entry', new_entry_path

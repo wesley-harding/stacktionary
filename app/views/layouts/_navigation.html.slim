@@ -1,18 +1,4 @@
 / navigation styled for Bootstrap 3.0
-/nav.navbar.navbar-inverse.navbar-fixed-top
-/  .container
-/    .navbar-header
-/      button.navbar-toggle[type="button" data-toggle="collapse" data-target=".navbar-collapse"]
-/        span.sr-only Toggle navigation
-/        span.icon-bar
-/        span.icon-bar
-/        span.icon-bar
-/      .navbar-left
-/        = link_to 'Home', root_path, class: 'navbar-brand'
-/        == render 'layouts/header_search'
-/    .collapse.navbar-collapse
-/      ul.nav.navbar-nav.navbar-right
-/        == render 'layouts/navigation_links'
 nav.navbar.navbar-inverse.navbar-fixed-top
   .container
     .navbar-header
@@ -21,11 +7,12 @@ nav.navbar.navbar-inverse.navbar-fixed-top
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      span.navbar-brand Stacktionary - A Dictionary for Developers
+      = link_to "Stacktionary - A Dictionary for Developers", "/", :class => ['navbar-brand']
     .navbar-collapse.collapse
       == render 'layouts/header_search'
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
+          li = link_to "Add a Word", new_entry_path
           - if current_user.admin?
             li = link_to "Admin", "/admin"
             li = link_to "User", user_path

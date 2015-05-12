@@ -1,12 +1,11 @@
-p#notice = notice
+.container
+  p#notice = notice
 
-p
-  strong User:
-  = @entry.user
-p
-  strong Term:
-  = @entry.term
-
-= link_to 'Edit', edit_entry_path(@entry)
-'|
-= link_to 'Back', entries_path
+  p
+    strong User:
+    = @entry.user
+  p
+    strong Term:
+    = @entry.term
+  - if @entry.user == current_user
+    = link_to 'Edit', edit_entry_path(@entry)
