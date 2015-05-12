@@ -2,6 +2,13 @@ class User < ActiveRecord::Base
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
+  acts_as_voter
+
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable, :confirmable,
+         :recoverable, :rememberable, :trackable, :validatable
+
   attr_accessor :login
 
   validates :username, presence: true, length: {maximum: 64}, uniqueness: {case_sensitive: false}
@@ -21,9 +28,4 @@ class User < ActiveRecord::Base
       where(conditions.to_hash).first
     end
   end
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
 end

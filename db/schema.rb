@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150512012509) do
+ActiveRecord::Schema.define(version: 20150512021515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,30 +20,72 @@ ActiveRecord::Schema.define(version: 20150512012509) do
     t.integer  "user_id"
     t.text     "definition"
     t.integer  "entry_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "definitions", ["cached_votes_down"], name: "index_definitions_on_cached_votes_down", using: :btree
+  add_index "definitions", ["cached_votes_score"], name: "index_definitions_on_cached_votes_score", using: :btree
+  add_index "definitions", ["cached_votes_total"], name: "index_definitions_on_cached_votes_total", using: :btree
+  add_index "definitions", ["cached_votes_up"], name: "index_definitions_on_cached_votes_up", using: :btree
+  add_index "definitions", ["cached_weighted_average"], name: "index_definitions_on_cached_weighted_average", using: :btree
+  add_index "definitions", ["cached_weighted_score"], name: "index_definitions_on_cached_weighted_score", using: :btree
+  add_index "definitions", ["cached_weighted_total"], name: "index_definitions_on_cached_weighted_total", using: :btree
   add_index "definitions", ["entry_id"], name: "index_definitions_on_entry_id", using: :btree
   add_index "definitions", ["user_id"], name: "index_definitions_on_user_id", using: :btree
 
   create_table "entries", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "term"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "entries", ["cached_votes_down"], name: "index_entries_on_cached_votes_down", using: :btree
+  add_index "entries", ["cached_votes_score"], name: "index_entries_on_cached_votes_score", using: :btree
+  add_index "entries", ["cached_votes_total"], name: "index_entries_on_cached_votes_total", using: :btree
+  add_index "entries", ["cached_votes_up"], name: "index_entries_on_cached_votes_up", using: :btree
+  add_index "entries", ["cached_weighted_average"], name: "index_entries_on_cached_weighted_average", using: :btree
+  add_index "entries", ["cached_weighted_score"], name: "index_entries_on_cached_weighted_score", using: :btree
+  add_index "entries", ["cached_weighted_total"], name: "index_entries_on_cached_weighted_total", using: :btree
   add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
 
   create_table "examples", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "example"
     t.integer  "entry_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "examples", ["cached_votes_down"], name: "index_examples_on_cached_votes_down", using: :btree
+  add_index "examples", ["cached_votes_score"], name: "index_examples_on_cached_votes_score", using: :btree
+  add_index "examples", ["cached_votes_total"], name: "index_examples_on_cached_votes_total", using: :btree
+  add_index "examples", ["cached_votes_up"], name: "index_examples_on_cached_votes_up", using: :btree
+  add_index "examples", ["cached_weighted_average"], name: "index_examples_on_cached_weighted_average", using: :btree
+  add_index "examples", ["cached_weighted_score"], name: "index_examples_on_cached_weighted_score", using: :btree
+  add_index "examples", ["cached_weighted_total"], name: "index_examples_on_cached_weighted_total", using: :btree
   add_index "examples", ["entry_id"], name: "index_examples_on_entry_id", using: :btree
   add_index "examples", ["user_id"], name: "index_examples_on_user_id", using: :btree
 
@@ -51,10 +93,24 @@ ActiveRecord::Schema.define(version: 20150512012509) do
     t.integer  "user_id"
     t.string   "source"
     t.integer  "entry_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "references", ["cached_votes_down"], name: "index_references_on_cached_votes_down", using: :btree
+  add_index "references", ["cached_votes_score"], name: "index_references_on_cached_votes_score", using: :btree
+  add_index "references", ["cached_votes_total"], name: "index_references_on_cached_votes_total", using: :btree
+  add_index "references", ["cached_votes_up"], name: "index_references_on_cached_votes_up", using: :btree
+  add_index "references", ["cached_weighted_average"], name: "index_references_on_cached_weighted_average", using: :btree
+  add_index "references", ["cached_weighted_score"], name: "index_references_on_cached_weighted_score", using: :btree
+  add_index "references", ["cached_weighted_total"], name: "index_references_on_cached_weighted_total", using: :btree
   add_index "references", ["entry_id"], name: "index_references_on_entry_id", using: :btree
   add_index "references", ["user_id"], name: "index_references_on_user_id", using: :btree
 

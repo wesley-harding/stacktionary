@@ -21,6 +21,8 @@ gem 'upmin-admin'
 gem 'paper_trail'
 gem 'ransack'
 gem 'kaminari'
+gem 'acts_as_votable'
+
 
 group :development do
   gem 'better_errors'
