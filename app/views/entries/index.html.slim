@@ -1,31 +1,44 @@
-.container
-  - unless @search_term['term_cont'].empty?
-    span Search results for #{@search_term['term_cont']}
+.container.entries.index
+  - if @entries.empty?
+    h4 No entries
+  - else
+    - unless @search_term['term_cont'].empty?
+      h4 Search results for "#{@search_term['term_cont']}"
+    hr
+    - @entries.order(:cached_votes_up).each do |entry|
+      .row.entry
+        .col-xs-1.text-center
+          .votes
+            a.btn.btn-primary.btn-xs.votes-up data-model='entry' class=(['has-vote', 'bg-info'] if !current_user.blank? and current_user.likes entry) Up
+            div = entry.get_likes.size
+            a.btn.btn-danger.btn-xs.votes-down data-model='entry' class=(['has-vote', 'bg-warning'] if !current_user.blank? and current_user.dislikes entry) Down
+        .col-xs-11
+          h2 = entry.term
+          - if entry.definitions.empty?
+            p
+              |No Definition
+              p.lead
+                = button_to 'Create Definition', entry, class: ['btn', 'btn-default'], :method => :get
+          - else
+            - entry.definitions.order(:cached_votes_up).first(1).each do |definition|
+              p = definition.definition
+              p.lead
+                 = button_to 'View', entry, class: ['btn', 'btn-primary'], :method => :get
+          p.pull-right
+            / Tags
+          ul.list-inline
+            li #{entry.definitions.count} definitions
+            li #{entry.examples.count} examples
+            li #{entry.references.count} resources
+          ul.list-inline
+            - if entry.user.present? and entry.user.username.present?
+              li Created #{time_ago_in_words(entry.created_at)} ago by #{link_to entry.user.username, entry.user}
+            - else
+              li Created #{time_ago_in_words(entry.created_at)} ago
+          hr
 
-  h1 Listing entries
 
-  table
-    thead
-      tr
-        th User
-        th Term
-        th
-        th
-        th
+    = paginate @entries
 
-    tbody
-      - @entries.each do |entry|
-        tr
-          td = entry.user
-          td = entry.term
-          td = link_to 'Show', entry
-          td = link_to 'Edit', edit_entry_path(entry)
-          td = link_to 'Destroy', entry, data: {:confirm => 'Are you sure?'}, :method => :delete
+    br
 
-  br
-
-  = paginate @entries
-
-  br
-
-  = link_to 'New Entry', new_entry_path

@@ -1,26 +1,34 @@
-.container
-  /p#notice = notice
-
-  h3 = @entry.term
-
-  .votes
-    a.btn.btn-primary.btn-xs.votes-up data-model='entry' class=(['has-vote', 'bg-info'] if !current_user.blank? and current_user.likes @entry) Up
-    = @entry.get_likes.size
-    a.btn.btn-danger.btn-xs.votes-down data-model='entry' class=(['has-vote', 'bg-warning'] if !current_user.blank? and current_user.dislikes @entry) Down
-
-  - if @entry.user == current_user
-    = link_to 'Edit', edit_entry_path(@entry)
-
-  p
-    strong User:
-    = @entry.user.username
+.container.entries.show
+  .row.entry
+    .col-xs-1.text-center
+      .votes
+        a.btn.btn-primary.btn-xs.votes-up data-model='entry' class=(['has-vote', 'bg-info'] if !current_user.blank? and current_user.likes @entry) Up
+        div = @entry.get_likes.size
+        a.btn.btn-danger.btn-xs.votes-down data-model='entry' class=(['has-vote', 'bg-warning'] if !current_user.blank? and current_user.dislikes @entry) Down
+    .col-xs-11
+      h2 = @entry.term
+      - if @entry.user == current_user
+        = link_to 'Edit', edit_entry_path(@entry)
+      ul.list-inline
+        - if @entry.user.present? and @entry.user.username.present?
+          li Created #{time_ago_in_words(@entry.created_at)} ago by #{link_to @entry.user.username, @entry.user}
+        - else
+          li Created #{time_ago_in_words(@entry.created_at)} ago
 
   h4 Definitions
   - @entry.definitions.each do |definition|
-    .votes
-      a.btn.btn-primary.btn-xs.votes-up data-model='definition' class=(['has-vote', 'bg-info'] if !current_user.blank? and current_user.likes definition) Up
-      = definition.get_likes.size
-      a.btn.btn-danger.btn-xs.votes-down data-model='definition' class=(['has-vote', 'bg-warning'] if !current_user.blank? and current_user.dislikes definition) Down
-    = definition.definition
-    h5 User
-    = definition.user.username
+    .row.definition
+      .col-xs-1.text-center
+        .votes
+          a.btn.btn-primary.btn-xs.votes-up data-model='definition' class=(['has-vote', 'bg-info'] if !current_user.blank? and current_user.likes definition) Up
+          div = definition.get_likes.size
+          a.btn.btn-danger.btn-xs.votes-down data-model='definition' class=(['has-vote', 'bg-warning'] if !current_user.blank? and current_user.dislikes definition) Down
+      .col-xs-11
+        = definition.definition
+        -if definition.user.present? && definition.user.username.present?
+          h5 User
+          = definition.user.username
+
+
+
+
