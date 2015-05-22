@@ -8,10 +8,7 @@
     - @entries.order(:cached_votes_up).each do |entry|
       .row.entry
         .col-xs-1.text-center
-          .votes
-            a.btn.btn-primary.btn-xs.votes-up data-model='entry' class=(['has-vote', 'bg-info'] if !current_user.blank? and current_user.likes entry) Up
-            div = entry.get_likes.size
-            a.btn.btn-danger.btn-xs.votes-down data-model='entry' class=(['has-vote', 'bg-warning'] if !current_user.blank? and current_user.dislikes entry) Down
+          = render 'shared/votes', :f => entry
         .col-xs-11
           h2 = entry.term
           - if entry.definitions.empty?

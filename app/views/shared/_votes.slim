@@ -1,0 +1,4 @@
+.votes
+  = link_to '', {:action => :upvote , :id => f.id}, method: :put, class: ['upvote', 'glyphicon', 'glyphicon-chevron-up', ((@current_user.liked? f) ? 'has-vote' : '')], remote: true, data: {type: :json}
+  div.count = [f.get_likes.size - f.get_dislikes.size, 0].max
+  = link_to '', {:action => :downvote , :id => f.id}, method: :put, class: ['downvote', 'glyphicon', 'glyphicon-chevron-down', ((@current_user.disliked? f) ? 'has-vote' : '')], remote: true, data: {type: :json}

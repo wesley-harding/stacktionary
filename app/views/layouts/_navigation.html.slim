@@ -15,7 +15,7 @@ nav.navbar.navbar-inverse.navbar-fixed-top
           li = link_to "Add a Word", new_entry_path
           - if current_user.admin?
             li = link_to "Admin", "/admin"
-            li = link_to "User", user_path
+            /li = link_to "User", user_path
           li.dropdown
             a.dropdown-toggle[data-toggle="dropdown"] Account <b class="caret"></b>
             ul.dropdown-menu

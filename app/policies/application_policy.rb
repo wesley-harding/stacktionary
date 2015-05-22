@@ -34,6 +34,14 @@ class ApplicationPolicy
     false
   end
 
+  def upvote?
+    @current_user
+  end
+
+  def downvote?
+    @current_user
+  end
+
   def scope
     Pundit.policy_scope!(user, record.class)
   end

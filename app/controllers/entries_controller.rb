@@ -4,6 +4,8 @@ class EntriesController < ApplicationController
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  include VotableResources
+
   def user_not_authorized
     flash[:alert] = "You must be logged in."
     redirect_to(users_path)
@@ -101,6 +103,7 @@ class EntriesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_entry
       @entry = Entry.find(params[:id])

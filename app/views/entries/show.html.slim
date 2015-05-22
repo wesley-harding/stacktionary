@@ -1,10 +1,7 @@
 .container.entries.show
   .row.entry
     .col-xs-1.text-center
-      .votes
-        a.btn.btn-primary.btn-xs.votes-up data-model='entry' class=(['has-vote', 'bg-info'] if !current_user.blank? and current_user.likes @entry) Up
-        div = @entry.get_likes.size
-        a.btn.btn-danger.btn-xs.votes-down data-model='entry' class=(['has-vote', 'bg-warning'] if !current_user.blank? and current_user.dislikes @entry) Down
+      = render 'shared/votes', :f => @entry
     .col-xs-11
       h2 = @entry.term
       - if @entry.user == current_user
@@ -19,10 +16,7 @@
   - @entry.definitions.each do |definition|
     .row.definition
       .col-xs-1.text-center
-        .votes
-          a.btn.btn-primary.btn-xs.votes-up data-model='definition' class=(['has-vote', 'bg-info'] if !current_user.blank? and current_user.likes definition) Up
-          div = definition.get_likes.size
-          a.btn.btn-danger.btn-xs.votes-down data-model='definition' class=(['has-vote', 'bg-warning'] if !current_user.blank? and current_user.dislikes definition) Down
+        = render 'shared/votes', :f => definition
       .col-xs-11
         = definition.definition
         -if definition.user.present? && definition.user.username.present?

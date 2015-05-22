@@ -1,0 +1,19 @@
+.votes .upvote, .votes .downvote {
+  cursor: pointer;
+  color: grey;
+  text-decoration: none;
+
+  &:hover {
+    background: none;
+    color: #BBBBBB;
+  }
+
+
+}
+.votes .upvote.has-vote {
+  color: #319a2e;
+}
+
+.votes .downvote.has-vote {
+  color: #a30004;
+}
